@@ -1,0 +1,564 @@
+type: collection.insomnia.rest/5.0
+name: FavMoviesApiTests
+meta:
+  id: wrk_c880d6707a1d460bb20bb5e397e7eae4
+  created: 1763735351921
+  modified: 1763747484576
+  description: ""
+collection:
+  - name: Users
+    meta:
+      id: fld_8314cbca1c1c462289ee4b0e2a3ae772
+      created: 1763735826746
+      modified: 1763736119990
+      sortKey: -1763735826746
+      description: ""
+    children:
+      - url: http://localhost:3000/api/v1/users/register
+        name: Register no Image
+        meta:
+          id: req_62ea665d6492473c85edaef0ebc5f619
+          created: 1763735351976
+          modified: 1763746693918
+          isPrivate: false
+          description: ""
+          sortKey: -1763735831538
+        method: POST
+        body:
+          mimeType: application/json
+          text: |-
+            {
+            	"name": "borrar",
+            	"email": "borrarSameUser@test.com",
+            	"password": "borrar"
+            }
+        parameters:
+          - id: pair_3d74d3795c984220ab2de550efade88b
+            name: ""
+            value: ""
+            description: ""
+            disabled: false
+        headers:
+          - name: Content-Type
+            value: application/json
+            id: pair_03a3b2be88534a87981ec47916e74a48
+          - name: User-Agent
+            value: insomnia/11.6.1
+            id: pair_6152a03219e14377a2dd0219ac19d596
+          - id: pair_616585acbd6d4c23b14058f019d61f46
+            name: ""
+            value: ""
+            description: ""
+            disabled: false
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+      - url: http://localhost:3000/api/v1/users/register
+        name: Register with Image
+        meta:
+          id: req_10b622e2a37d4965a368124d19fe2c8c
+          created: 1763735937483
+          modified: 1763746697068
+          isPrivate: false
+          description: ""
+          sortKey: -1763735831513
+        method: POST
+        body:
+          mimeType: multipart/form-data
+          params:
+            - id: pair_ce3022662b2842579d25c6172f39d022
+              name: name
+              value: image1
+              description: ""
+              disabled: false
+            - id: pair_34546a73b33b4bb196894d6f7b547df6
+              name: email
+              value: image1@test.com
+              description: ""
+              disabled: false
+            - id: pair_366068a346f54c828d4e8477e5b173c1
+              name: password
+              value: image
+              description: ""
+              disabled: false
+            - id: pair_47b70b2ac72b4126b54b25ee5110d65c
+              name: image
+              value: ""
+              description: ""
+              disabled: false
+              type: file
+              fileName: C:\Users\jonat\Desktop\cap.png
+        parameters:
+          - id: pair_3d74d3795c984220ab2de550efade88b
+            name: ""
+            value: ""
+            description: ""
+            disabled: false
+        headers:
+          - name: Content-Type
+            value: multipart/form-data
+          - name: User-Agent
+            value: insomnia/11.6.1
+            id: pair_6152a03219e14377a2dd0219ac19d596
+          - id: pair_616585acbd6d4c23b14058f019d61f46
+            name: ""
+            value: ""
+            description: ""
+            disabled: false
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+      - url: http://localhost:3000/api/v1/users/692095fa64d9c9ec6e59978a
+        name: Delete User Admin
+        meta:
+          id: req_53b18992502a4063bb68059752adaa6f
+          created: 1763736127528
+          modified: 1763746717863
+          isPrivate: false
+          description: ""
+          sortKey: -1763708526374.7188
+        method: DELETE
+        headers:
+          - name: User-Agent
+            value: insomnia/11.6.1
+        authentication:
+          type: bearer
+          token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY5MjA3YzJmZGQ5M2EyOThiMWRkNzM4MiIsImlhdCI6MTc2MzczNjY1N30.948FVE-p_fUSPcmVD34EDnzX2JqIjvGNnVX9Sbq4xm8
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+      - url: http://localhost:3000/api/v1/users/login
+        name: Log In
+        meta:
+          id: req_18c835f62e23457385ed583ea6b45ee9
+          created: 1763736272746
+          modified: 1763746695419
+          isPrivate: false
+          description: ""
+          sortKey: -1763735831488
+        method: POST
+        body:
+          mimeType: application/json
+          text: |-
+            {
+            	"email": "image1@test.com",
+            	"password": "image"
+            }
+        headers:
+          - name: Content-Type
+            value: application/json
+          - name: User-Agent
+            value: insomnia/11.6.1
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+      - url: http://localhost:3000/api/v1/users/692080b964d9c9ec6e59977a
+        name: Delete User as User
+        meta:
+          id: req_ace06f4b482d463aa83d1968ae9fabca
+          created: 1763737819502
+          modified: 1763746720513
+          isPrivate: false
+          description: ""
+          sortKey: -1763708774596.2031
+        method: DELETE
+        headers:
+          - name: User-Agent
+            value: insomnia/11.6.1
+        authentication:
+          type: bearer
+          token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY5MjA4MGI5NjRkOWM5ZWM2ZTU5OTc3YSIsImlhdCI6MTc2MzczNzc5OH0.7w2IfvdyWjhaTQMrsrj6PvixZNkJFUhOV2MG4QvVRAI
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+      - url: http://localhost:3000/api/v1/users/6920973964d9c9ec6e59979e
+        name: Update User
+        meta:
+          id: req_5857514569704ea08d556ef63c0d29a9
+          created: 1763738034012
+          modified: 1763746686069
+          isPrivate: false
+          description: ""
+          sortKey: -1763712001475.5
+        method: PUT
+        body:
+          mimeType: multipart/form-data
+          params:
+            - id: pair_ce3022662b2842579d25c6172f39d022
+              name: name
+              value: '"image1"'
+              description: ""
+              disabled: true
+            - id: pair_34546a73b33b4bb196894d6f7b547df6
+              name: email
+              value: '"image1@test.com'
+              description: ""
+              disabled: true
+            - id: pair_366068a346f54c828d4e8477e5b173c1
+              name: password
+              value: '"image"'
+              description: ""
+              disabled: true
+            - id: pair_47b70b2ac72b4126b54b25ee5110d65c
+              name: image
+              value: ""
+              description: ""
+              disabled: false
+              type: file
+              fileName: C:\Users\jonat\Desktop\cap.png
+        parameters:
+          - id: pair_3d74d3795c984220ab2de550efade88b
+            name: ""
+            value: ""
+            description: ""
+            disabled: false
+        headers:
+          - name: Content-Type
+            value: multipart/form-data
+          - name: User-Agent
+            value: insomnia/11.6.1
+            id: pair_6152a03219e14377a2dd0219ac19d596
+          - id: pair_616585acbd6d4c23b14058f019d61f46
+            name: ""
+            value: ""
+            description: ""
+            disabled: false
+        authentication:
+          type: bearer
+          token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY5MjA5NzM5NjRkOWM5ZWM2ZTU5OTc5ZSIsImlhdCI6MTc2Mzc0NDE0MX0.ohoJrhJGIgoqNyKkbD367bjieH_2dEoZVC7IQ4c2Rto
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+      - url: http://localhost:3000/api/v1/users/6920973964d9c9ec6e59979e/role
+        name: Update Role
+        meta:
+          id: req_ab11f1e6e72e47ea9a5bcd510fff6d3b
+          created: 1763738170660
+          modified: 1763746829867
+          isPrivate: false
+          description: ""
+          sortKey: -1763708029931.75
+        method: PUT
+        body:
+          mimeType: application/json
+          text: |-
+            {
+            	"role":"user"
+            }
+        parameters:
+          - id: pair_3d74d3795c984220ab2de550efade88b
+            name: ""
+            value: ""
+            description: ""
+            disabled: false
+        headers:
+          - name: Content-Type
+            value: application/json
+          - name: User-Agent
+            value: insomnia/11.6.1
+            id: pair_6152a03219e14377a2dd0219ac19d596
+          - id: pair_616585acbd6d4c23b14058f019d61f46
+            name: ""
+            value: ""
+            description: ""
+            disabled: false
+        authentication:
+          type: bearer
+          token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY5MjA3YzJmZGQ5M2EyOThiMWRkNzM4MiIsImlhdCI6MTc2MzczNjY1N30.948FVE-p_fUSPcmVD34EDnzX2JqIjvGNnVX9Sbq4xm8
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+      - url: http://localhost:3000/api/v1/users/
+        name: Get Users
+        meta:
+          id: req_27f51cef085b44c98441cb40abff3c73
+          created: 1763743179003
+          modified: 1763746707105
+          isPrivate: false
+          description: ""
+          sortKey: -1763727888125.5
+        method: GET
+        headers:
+          - name: User-Agent
+            value: insomnia/11.6.1
+        authentication:
+          type: bearer
+          token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY5MjA3YzJmZGQ5M2EyOThiMWRkNzM4MiIsImlhdCI6MTc2MzczNjY1N30.948FVE-p_fUSPcmVD34EDnzX2JqIjvGNnVX9Sbq4xm8
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+      - url: http://localhost:3000/api/v1/users/6920973964d9c9ec6e59979e
+        name: Get User
+        meta:
+          id: req_3cc9a18ecea349d19936dd19829c11c5
+          created: 1763743187343
+          modified: 1763746709080
+          isPrivate: false
+          description: ""
+          sortKey: -1763723916444.25
+        method: GET
+        headers:
+          - name: User-Agent
+            value: insomnia/11.6.1
+        authentication:
+          type: bearer
+          token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY5MjA3YzJmZGQ5M2EyOThiMWRkNzM4MiIsImlhdCI6MTc2MzczNjY1N30.948FVE-p_fUSPcmVD34EDnzX2JqIjvGNnVX9Sbq4xm8
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+      - url: http://localhost:3000/api/v1/users/6920973964d9c9ec6e59979e/favourites
+        name: Add Fav Movie
+        meta:
+          id: req_81f8c16de9a24a57ac3e43fa44abe072
+          created: 1763744648817
+          modified: 1763747156123
+          isPrivate: false
+          description: ""
+          sortKey: -1763710015703.625
+        method: PUT
+        body:
+          mimeType: application/json
+          text: |-
+            {
+            	"movieId":"6920a5446afa2ab9986634af"
+            }
+        parameters:
+          - id: pair_3d74d3795c984220ab2de550efade88b
+            name: ""
+            value: ""
+            description: ""
+            disabled: false
+        headers:
+          - name: Content-Type
+            value: application/json
+          - name: User-Agent
+            value: insomnia/11.6.1
+            id: pair_6152a03219e14377a2dd0219ac19d596
+          - id: pair_616585acbd6d4c23b14058f019d61f46
+            name: ""
+            value: ""
+            description: ""
+            disabled: false
+        authentication:
+          type: bearer
+          token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY5MjA5NzM5NjRkOWM5ZWM2ZTU5OTc5ZSIsImlhdCI6MTc2Mzc0NDE0MX0.ohoJrhJGIgoqNyKkbD367bjieH_2dEoZVC7IQ4c2Rto
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+      - url: http://localhost:3000/api/v1/users/6920973964d9c9ec6e59979e/favourites
+        name: Delete Fav Movie
+        meta:
+          id: req_b01821a86b584507911b71ab4fc2f38a
+          created: 1763746546344
+          modified: 1763746608299
+          isPrivate: false
+          description: ""
+          sortKey: -1763709022817.6875
+        method: DELETE
+        body:
+          mimeType: application/json
+          text: |-
+            {
+            	"movieId":"691ff39b8ace473b4f7beda5"
+            }
+        parameters:
+          - id: pair_3d74d3795c984220ab2de550efade88b
+            name: ""
+            value: ""
+            description: ""
+            disabled: false
+        headers:
+          - name: Content-Type
+            value: application/json
+          - name: User-Agent
+            value: insomnia/11.6.1
+            id: pair_6152a03219e14377a2dd0219ac19d596
+          - id: pair_616585acbd6d4c23b14058f019d61f46
+            name: ""
+            value: ""
+            description: ""
+            disabled: false
+        authentication:
+          type: bearer
+          token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY5MjA5NzM5NjRkOWM5ZWM2ZTU5OTc5ZSIsImlhdCI6MTc2Mzc0NDE0MX0.ohoJrhJGIgoqNyKkbD367bjieH_2dEoZVC7IQ4c2Rto
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+  - name: Movies
+    meta:
+      id: fld_5c4db15f8f054a32b9bff77d9973b6d9
+      created: 1763735838095
+      modified: 1763744188011
+      sortKey: -1763735838095
+      description: ""
+    children:
+      - url: http://localhost:3000/api/v1/movies/
+        name: Get Movies
+        meta:
+          id: req_7a979d02b4f34b5d99d8d3ae5bc5e2ba
+          created: 1763744197499
+          modified: 1763747380869
+          isPrivate: false
+          description: ""
+          sortKey: -1763735849956
+        method: GET
+        headers:
+          - name: User-Agent
+            value: insomnia/11.6.1
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+      - url: http://localhost:3000/api/v1/movies/
+        name: Create Movies
+        meta:
+          id: req_98169fa05e2948df86b4d2cab6c5a314
+          created: 1763747010309
+          modified: 1763747306642
+          isPrivate: false
+          description: ""
+          sortKey: -1763735850056
+        method: POST
+        body:
+          mimeType: application/json
+          text: |-
+            {
+            	"title": "Ice Age",
+            	"categories": ["Comedy"]
+            }
+        headers:
+          - name: Content-Type
+            value: application/json
+          - name: User-Agent
+            value: insomnia/11.6.1
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+      - url: http://localhost:3000/api/v1/movies/6920a58a6afa2ab9986634b7
+        name: Update Movies
+        meta:
+          id: req_f6369accb0bf4276a771e6fd71c6feeb
+          created: 1763747189632
+          modified: 1763747383963
+          isPrivate: false
+          description: ""
+          sortKey: -1763735840747
+        method: PUT
+        body:
+          mimeType: application/json
+          text: |-
+            {
+            	"title": "Scary Movie 2",
+            	"categories": ["comedy", "horror"]
+            }
+        headers:
+          - name: Content-Type
+            value: application/json
+          - name: User-Agent
+            value: insomnia/11.6.1
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+      - url: http://localhost:3000/api/v1/movies/6920a6516afa2ab9986634bc
+        name: Delete Movies
+        meta:
+          id: req_95b9fbc2698642a7a3741fb1d174450a
+          created: 1763747394312
+          modified: 1763747415545
+          isPrivate: false
+          description: ""
+          sortKey: -1763735836142.5
+        method: DELETE
+        headers:
+          - name: User-Agent
+            value: insomnia/11.6.1
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+cookieJar:
+  name: Default Jar
+  meta:
+    id: jar_0054e080a7a37cfd644fc0b244b4df853a4bb3b8
+    created: 1763735351952
+    modified: 1763735351952
+environments:
+  name: Base Environment
+  meta:
+    id: env_0054e080a7a37cfd644fc0b244b4df853a4bb3b8
+    created: 1763735351940
+    modified: 1763735351940
+    isPrivate: false
