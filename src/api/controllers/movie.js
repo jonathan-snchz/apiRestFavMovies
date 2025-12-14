@@ -1,12 +1,13 @@
 const fetchMovie = require('../../utils/tmdbApiCall');
 const Movie = require('../models/Movie');
+const User = require('../models/User');
 
 const getMovies = async (req, res, next) => {
     try {
         const movies = await Movie.find();
         return res.status(200).json(movies);
     } catch (error) {
-        return res.status(400).json("error");
+        return res.status(400).json("Error recuperando las películas", error);
     }
 }
 
@@ -15,7 +16,7 @@ const postMovies = async (req, res, next) => {
         const movie = req.body;
         const movieExist = await Movie.findOne({ title: movie.title })
         if (movieExist) {
-            return res.status(400).json("error registrando al usuario");
+            return res.status(400).json("La película ya existe ", error);
         }
         const tmdbData = await fetchMovie(movie.title);
 
@@ -29,7 +30,7 @@ const postMovies = async (req, res, next) => {
         const movieSaved = await newMovie.save();
         return res.status(201).json(movieSaved);
     } catch (error) {
-        return res.status(400).json("error");
+        return res.status(400).json("Error registrando la película ", error);
     }
 }
 const updateMovies = async (req, res, next) => {
@@ -59,20 +60,25 @@ const updateMovies = async (req, res, next) => {
         }
 
     } catch (error) {
-        return res.status(400).json("error");
+        return res.status(400).json("No se ha podido actualizar la película ", error);
     }
 }
 
 const deleteMovies = async (req, res, next) => {
     try {
         const { id } = req.params;
+        // Borramos la película del campo favMovies de todos los usuarios
+        await User.updateMany(
+            { favMovies: id },
+            { $pull: { favMovies: id } }
+        );
         const movieDeleted = await Movie.findByIdAndDelete(id);
         return res.status(200).json({
             message: "Elemento eliminado",
             elemento: movieDeleted
         })
     } catch (error) {
-        return res.status(400).json("error");
+        return res.status(400).json("Error al eliminar la película ", error);
     }
 }
 

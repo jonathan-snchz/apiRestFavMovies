@@ -67,6 +67,8 @@ index.js
 ```
 ## Rutas
 
+### User
+
 | Método  | Ruta | Uso | Auth |
 | ------------- |:-------------:|:-------------:|:-------------:|
 | POST | /users/register | Registrar un nuevo usuario | None |
@@ -74,10 +76,15 @@ index.js
 | GET | /users | Listar los usuarios | Logged In |
 | GET | /users/:id | Encontrar un usuario | Logged In |
 | PUT | /users/:id | Actualizar un usuario | Owner/Admin |
-| PUT | /users/:id/favourites | Añadir película a favoritos | Owner/Admin |
-| DELETE | /users/:id/favourites | Quitar película de favoritos | Owner/Admin |
 | DELETE | /users/:id | Borrar usuario | Owner/Admin |
+| PUT | /users/:id/favourites | Añadir o eliminar película de favoritos | Owner/Admin |
 | PUT | /users/:id/role | Actualizar rol de usuario | Admin |
+| PUT | /users/:id/password | Actualizar contraseña del usuario | Owner/Admin |
+
+### Movie
+
+| Método  | Ruta | Uso | Auth |
+| ------------- |:-------------:|:-------------:|:-------------:|
 | GET | /movies | Listar las películas | None |
 | POST | /movies | Crear una película | None |
 | PUT | /movies/:id | Actualizar una película | None |
@@ -97,4 +104,4 @@ index.js
 3. Configurar variables de entorno en `.env`
 4. `npm run dev`
 
-Hay un usuario creado con las credenciales admin@test.com / admin al que se le ha dado rol de admin manualmente en la base de datos. En este caso como es un proyecto para la escuela el .env y las claves están presentes para facilitar la correción. Además está incluido la colección de peticiones que usé en __Insomnia__
+Hay un usuario creado con las credenciales ```admin@test.com / admin``` al que se le ha dado rol de admin manualmente en la base de datos. En este caso como es un proyecto para la escuela el .env y las claves están presentes para facilitar la correción. Además está incluido la colección de peticiones que usé en __Insomnia__

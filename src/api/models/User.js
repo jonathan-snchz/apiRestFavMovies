@@ -2,8 +2,8 @@ const { default: mongoose } = require("mongoose");
 const bcrypt = require('bcrypt');
 
 const userSchema = new mongoose.Schema({
-    name: {type: String, trim: true, required: true},
-    email:{type: String, trim: true, required: true},
+    name: {type: String, trim: true, required: true, unique: true},
+    email:{type: String, trim: true, required: true, unique: true},
     password: {
         type: String, 
         trim: true, 
@@ -16,7 +16,7 @@ const userSchema = new mongoose.Schema({
         default: 'user'
     },
     image:{
-        type: String, trim: true, required: false,
+        type: String, trim: true, required: false, default: 'https://res.cloudinary.com/ddg5tziiv/image/upload/v1765649767/Sample_User_Icon_bjt4fd.png',
     },
     // DATO RELACIONAL
     favMovies:[{
@@ -25,6 +25,13 @@ const userSchema = new mongoose.Schema({
     }]
 },{
     timestamps: true,
+})
+
+userSchema.pre('save', function (next){
+    if(this.isNew || this.isModified('password')){
+        this.password = bcrypt.hashSync(this.password, 10)
+    }
+    next()
 })
 
 const User = mongoose.model('users', userSchema)

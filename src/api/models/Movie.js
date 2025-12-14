@@ -1,7 +1,7 @@
 const { default: mongoose } = require("mongoose");
 
 const movieSchema = new mongoose.Schema({
-    title: {type: String, required: true, trim: true, unique: true,},
+    title: {type: String, required: true, trim: true,},
     categories: [{
         type: String,
         enum:['horror', 'drama', 'comedy', 'thriller', 'crime'],

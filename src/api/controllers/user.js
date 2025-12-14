@@ -14,15 +14,14 @@ async function registerUser(req, res, next) {
     const newUser = new User({
         name: user.name,
         email: user.email,
-        password: await bcrypt.hash(user.password, 10),
-        role: 'user',
-        image: req.file ? req.file.path : null,
+        password: user.password,
+        image: req.file ? req.file.path : undefined,
     })
     
     const userSaved = await newUser.save()
     return res.status(201).json(userSaved)
   } catch (error) {
-        return res.status(400).json("Error registrando al usuario");
+        return res.status(400).json("Error registrando al usuario ", error);
   }
 }
 
@@ -33,14 +32,14 @@ async function logInUser(req, res, next) {
         if (!user) {
             return res.status(400).json("Contraseña o usuario incorrectos")
         }
-        if (bcrypt.compareSync(req.body.password, user.password)) {
+        if (bcrypt.compareSync(password, user.password)) {
             const token = generateSign(user._id)
             return res.status(200).json({token, user})
         } else{
             res.status(400).json("Contraseña o usuario incorrectos")
         }
     } catch (error) {
-        return res.status(400).json("Error en el login")
+        return res.status(400).json("Error en el login ", error)
     }
 }
 
@@ -51,7 +50,7 @@ async function findUser(req, res, next) {
 
         return res.status(200).json(user)
     } catch (error){
-        return res.status(400).json("No se ha encontrado el usuario")   
+        return res.status(400).json("No se ha encontrado el usuario ", error)   
     }
 }
 async function getUsers(req, res, next) {
@@ -59,7 +58,7 @@ async function getUsers(req, res, next) {
         const users = await User.find().select("-password").populate("favMovies");
         return res.status(200).json(users);
     } catch (error) {
-        return res.status(400).json("error");
+        return res.status(400).json("Error al recuperar los usuarios ", error);
     }
 }
 async function deleteUser(req, res, next) {
@@ -70,17 +69,14 @@ async function deleteUser(req, res, next) {
         deleteApiImg(userDeleted.image);
         return res.status(200).json(`Deleted the user: ${userDeleted}`)        
     } catch (error) {
-        return res.status(400).json(error);
+        return res.status(400).json("Error eliminando el usuario ", error);
     }
 }
 async function updateUser(req, res, next) {
     const {id} = req.params;
     const userUpdates = req.body;
-    const {role, ...allowedUpdates} = userUpdates;
+    const {role, password, ...allowedUpdates} = userUpdates;
     
-    if (allowedUpdates.password) {
-        allowedUpdates.password = await bcrypt.hash(allowedUpdates.password, 10)
-    }
     if (req.file) {
         const user = await User.findById(id);
         if (user.image) {
@@ -91,6 +87,24 @@ async function updateUser(req, res, next) {
     const updatedUser = await User.findByIdAndUpdate(id, allowedUpdates, {new: true});
 
     return res.status(200).json(updatedUser);
+}
+async function updatePassword(req, res, next){
+    const {id} = req.params;
+    const {oldPassword, newPassword} = req.body;
+
+    const user = await User.findById(id);
+    
+    if(!bcrypt.compareSync(oldPassword, user.password)){
+        return res.status(400).json('La contraseña es incorrecta');
+    }
+    
+    const hashedPassword = await bcrypt.hash(newPassword, 10);
+
+    const updatedUser = await User.findByIdAndUpdate(id, {
+        password: hashedPassword,
+    }, {new:true});
+
+    return res.status(201).json(updatedUser)
 }
 async function updateRole(req, res, next) {
     const {id} = req.params;
@@ -106,21 +120,21 @@ async function updateFavMovies(req, res, next) {
     const {id} = req.params;
     const {movieId} = req.body;
 
-    const updatedUser = await User.findByIdAndUpdate(id, {
-        $addToSet: {favMovies: movieId}
-    }, {new:true}).populate("favMovies");
-    
-    return res.status(201).json(updatedUser.favMovies)
-}
-async function deleteFavMovie(req, res, next) {
-    const {id} = req.params;
-    const {movieId} = req.body;
+    const user = User.findById(id).populate('favMovies');
 
-    const updatedUser = await User.findByIdAndUpdate(id, {
-        $pull: {favMovies: movieId}
-    }, {new:true}).populate("favMovies");
-    
-    return res.status(200).json(updatedUser.favMovies)
+    if (user.favMovies.includes(movieId)) {
+        const updatedUser = await User.findByIdAndUpdate(id, {
+            $pull: {favMovies: movieId}
+        }, {new:true}).populate("favMovies");
+
+        return res.status(200).json(updatedUser.favMovies)
+    } else{
+        const updatedUser = await User.findByIdAndUpdate(id, {
+            $addToSet: {favMovies: movieId}
+        }, {new:true}).populate("favMovies");
+
+        return res.status(200).json(updatedUser.favMovies)
+    }
 }
 module.exports = { 
     registerUser, 
@@ -129,7 +143,7 @@ module.exports = {
     getUsers,
     deleteUser,
     updateUser,
+    updatePassword,
     updateRole,
     updateFavMovies,
-    deleteFavMovie
 }
